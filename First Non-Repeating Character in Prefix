@@ -1,0 +1,16 @@
+from collections import deque, Counter
+
+def firstNonRepeating(s):
+    freq = Counter()
+    q = deque()
+    result = []
+    for c in s:
+        freq[c] += 1
+        q.append(c)
+        while q and freq[q[0]] > 1:
+            q.popleft()
+        result.append(q[0] if q else '#')
+    return ''.join(result)
+
+s = "aabc"
+print(firstNonRepeating(s))  
