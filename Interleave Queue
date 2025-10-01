@@ -1,0 +1,21 @@
+def interleaveQueue(q):
+    n = len(q)
+    if n % 2 != 0:
+        return q
+    stack = []
+    half = n // 2
+    for _ in range(half):
+        stack.append(q.popleft())
+    while stack:
+        q.append(stack.pop())
+    for _ in range(half):
+        q.append(q.popleft())
+    for _ in range(half):
+        stack.append(q.popleft())
+    while stack:
+        q.append(stack.pop())
+        q.append(q.popleft())
+    return q
+
+q = deque([2, 4, 3, 1])
+print(list(interleaveQueue(q)))  
