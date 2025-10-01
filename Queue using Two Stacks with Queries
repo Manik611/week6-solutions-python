@@ -1,0 +1,31 @@
+class Queue2Stacks:
+    def __init__(self):
+        self.s1 = []
+        self.s2 = []
+
+    def enqueue(self, x):
+        self.s1.append(x)
+
+    def dequeue(self):
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2.pop() if self.s2 else -1
+
+    def front(self):
+        if not self.s2:
+            while self.s1:
+                self.s2.append(self.s1.pop())
+        return self.s2[-1] if self.s2 else -1
+
+q = Queue2Stacks()
+queries = [
+    (1, 42), (2,), (1, 14), (3,), (1, 28), (3,), (1, 60), (1, 78), (2,), (2,)
+]
+for query in queries:
+    if query[0] == 1:
+        q.enqueue(query[1])
+    elif query[0] == 2:
+        q.dequeue()
+    elif query[0] == 3:
+        print(q.front())
